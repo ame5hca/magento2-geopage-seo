@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="giftgroup_config" translate="label" sortOrder="200">
+            <label>Gift Group</label>
+        </tab>
+        <section id="geo_page" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Geo Page Setting</label>
+            <tab>giftgroup_config</tab>
+            <resource>GiftGroup_GeoPage::geo_page_config</resource>
+            <group id="additonal_script_css" translate="label" type="text" sortOrder="10" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Additional Script And Styles</label>                
+                <field id="external_links" translate="label comment" type="textarea" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>External Links</label>
+                    <comment><![CDATA[Here you can include any addiitonal external css/js/font links. If adding multiple ones, then put each one in next line.]]></comment>
+                </field>
+                <field id="additional_styles" translate="label comment" type="textarea" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Additional Styles</label>
+                    <comment><![CDATA[Here you can add any addiitonal css styles. eg: h1 {font-size:20px;}]]></comment>
+                </field>
+            </group>
+            <group id="category_page" translate="label" type="text" sortOrder="15" showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Category Page</label>               
+                <field id="url_key_mapping" translate="label comment" type="textarea" sortOrder="15" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Category Url Key Mapping</label>
+                    <comment><![CDATA[If category page is 404, then map here the url key. Original and mapping value should be separated by colon(:) and multiple category data should be separated by semicolon(;). Eg: kids1:kids;gourmet1:gourmet;....]]></comment>
+                </field>
+                <field id="name_mapping" translate="label comment" type="textarea" sortOrder="15" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Category Name Mapping</label>
+                    <comment><![CDATA[If we want to show another name for a category, then add the mapping here. Old name and new name will be separated by colon(:) and multiple categories will be separated by semicolon(;). Eg: Gourmet Foods:Gourmet;Flower Baskets:Flower;....]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

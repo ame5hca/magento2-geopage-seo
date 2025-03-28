@@ -1,0 +1,68 @@
+<?php
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+?>
+<?php
+$viewModel = $block->getViewModel();
+if($viewModel->showFaqBlock()):
+    $cityName = $viewModel->getCityName();
+    $popularProducts = $viewModel->getPopularProducts();
+?>
+    <div class="mainContainer block-content faq width-80">
+        <div class="block-title">
+            <h3><?= __('Frequently Asked Questions') ?></h3>
+            <div class="heading-divider heading-divider--short"></div>
+        </div>
+        <div class="content">
+            <div id="faq" class="faq-body" itemscope itemtype="https://schema.org/FAQPage">                
+                <div class="faq-list">
+                    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <details>
+                            <?php $summary = __($viewModel->getFaqQn1(), $cityName); ?>
+                            <summary title="<?= $summary ?>"><h4 itemprop="name"><?= $summary ?></h4></summary>
+                            <div class="faq-content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text"><?= __($viewModel->getFaqAns1(), $cityName)?></p>
+                                <?php if ($popularProducts->getSize()): ?>
+                                    <ul>
+                                    <?php foreach ($popularProducts as $item): ?>
+                                    <li><a class="product-item-link"
+                                            title="<?= $escaper->escapeHtmlAttr($item->getName()) ?>"
+                                            href="<?= $escaper->escapeUrl($block->getProductUrl($item)) ?>">
+                                            <?= $escaper->escapeHtml($item->getName()) ?>
+                                        </a></li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            </div>
+                        </details>
+                    </div>
+                    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <details>
+                            <?php $summary = __(
+                                    $viewModel->getFaqQn2(), 
+                                    $viewModel->getCategoryName() . ' ',
+                                    $cityName,
+                                    $viewModel->getRegionName(),
+                                    $viewModel->getCountryName()
+                                ); ?>
+                            <summary title="<?= $summary ?>"><h4 itemprop="name"><?= $summary ?></h4></summary>
+                            <div class="faq-content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p itemprop="text"><?= __($viewModel->getFaqAns2(), $cityName, $viewModel->getRegionName(), $viewModel->getCountryName()) ?></p>
+                            </div>
+                        </details>
+                    </div>
+                    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <details>
+                            <?php $summary = __($viewModel->getFaqQn3()); ?>
+                            <summary title="<?= $summary ?>"><h4 itemprop="name"><?= $summary ?></h4></summary>
+                            <div class="faq-content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                <p itemprop="text"><?= __($viewModel->getFaqAns3()) ?></p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

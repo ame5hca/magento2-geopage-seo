@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    layout="1column"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="GiftGroup_GeoPage::css/geopage.css" />
+        <css src="GiftGroup_CategoryFaq::css/category_faq.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title" remove="true" />
+        <attribute name="class" value="page-products"/>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="geopage_additional_scripts_styles" template="GiftGroup_GeoPage::page/head_additional.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        GiftGroup\GeoPage\ViewModel\Head
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                name="city.page.view.wrapper"
+                template="GiftGroup_GeoPage::city/view/wrapper.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\CityPage</argument>
+                    </arguments>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.slider" as="city_slider" template="GiftGroup_GeoPage::city/view/block/slider.phtml" before="-" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.block2" as="block2" template="GiftGroup_GeoPage::city/view/block/block2.phtml" after="city_slider"/>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.block3.product.carousel" as="block3" template="GiftGroup_GeoPage::city/view/block/block3.phtml" after="block2">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\Block3</argument>
+                        </arguments>
+                   </block>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.freeshipping.info" as="freeshipping_info" template="GiftGroup_GeoPage::city/view/block/free_shipping_info.phtml" after="block3" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.three.column.info" as="three_column" template="GiftGroup_GeoPage::city/view/block/three_column.phtml" after="freeshipping_info" />
+                   <block class="GiftGroup\GeoPage\Block\CityPage\ListProduct" name="city.page.view.product.list" as="city_product_list" template="GiftGroup_GeoPage::city/view/block/product_list.phtml" after="three_column">
+                        <block class="GiftGroup\GeoPage\Block\CityPage\ListProduct" name="category.products.list" as="product_list" template="GiftGroup_GeoPage::city/view/block/product/list.phtml">
+                            <arguments>
+                                <argument name="viewModel" xsi:type="object">Magento\Catalog\ViewModel\Product\OptionsData</argument>
+                                <argument name="page_model" xsi:type="object">
+                                    GiftGroup\GeoPage\ViewModel\CityPage
+                                </argument>
+                            </arguments>
+                            <container name="category.product.list.additional" as="additional" />
+                            <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                                <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                            </block>
+                            <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">
+                                <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                                    name="category.product.addto.compare" as="compare"
+                                    template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                            </block>
+                            <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                                <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                            </block>
+                            <action method="setToolbarBlockName">
+                                <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                            </action>
+                        </block>
+                   </block>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.same.day.delivery.info" as="same_day_delivery_info" template="GiftGroup_GeoPage::city/view/block/same_day_delivery_info.phtml" after="city_product_list" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.next.day.delivery.info" as="next_day_delivery_info" template="GiftGroup_GeoPage::city/view/block/next_day_delivery_info.phtml" after="same_day_delivery_info" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.any.day.delivery.info" as="any_day_delivery_info" template="GiftGroup_GeoPage::city/view/block/any_day_delivery_info.phtml" after="next_day_delivery_info" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.review.products" as="review_products" template="GiftGroup_GeoPage::city/view/block/reviews.phtml" after="any_day_delivery_info">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\ReviewProductListBlock</argument>
+                        </arguments>
+                   </block>
+                   <block class="GiftGroup\GeoPage\Block\CityPage\PopularProducts" name="city.page.view.popular.products" as="popular_products" template="GiftGroup_GeoPage::city/view/block/popular_products.phtml" after="review_products">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\PopularProducts</argument>
+                        </arguments>
+                        <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                            <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                        </block>
+                   </block>
+                   <block class="GiftGroup\GeoPage\Block\CityPage\FAQ" name="city.page.view.faq" as="city_faq" template="GiftGroup_GeoPage::city/view/block/faq.phtml" after="popular_products">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\FAQBlock</argument>
+                        </arguments>
+                   </block>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.city.category.pages" as="city_category_pages" template="GiftGroup_GeoPage::city/view/block/category_page_list.phtml" after="city_faq">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\CategoryListBlock</argument>
+                        </arguments>
+                   </block>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.realted.cities" as="related_cities" template="GiftGroup_GeoPage::city/view/block/related_cities.phtml" after="city_category_pages" />
+                   <!--<block class="Magento\Framework\View\Element\Template" name="city.page.view.categories.view.link.top" as="view_categories_link_top" template="GiftGroup_GeoPage::city/view/block/view_categories_link.phtml" after="city_slider"/>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.send.gift.info" as="send_gift_info" template="GiftGroup_GeoPage::city/view/block/send_gift_info.phtml" after="view_categories_link_top"/>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.product.list" as="city_product_list" template="GiftGroup_GeoPage::city/view/block/product_list.phtml" after="send_gift_info">
+                        <block class="GiftGroup\GeoPage\Block\CityPage\ListProduct" name="category.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
+                            <arguments>
+                                <argument name="viewModel" xsi:type="object">Magento\Catalog\ViewModel\Product\OptionsData</argument>
+                            </arguments>
+                            <container name="category.product.list.additional" as="additional" />
+                            <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                                <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                            </block>
+                            <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">
+                                <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                                    name="category.product.addto.compare" as="compare"
+                                    template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                            </block>
+                            <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                                <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                            </block>
+                            <action method="setToolbarBlockName">
+                                <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                            </action>
+                        </block>
+                   </block>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.categories.view.link.bottom" as="view_categories_link_bottom" template="GiftGroup_GeoPage::city/view/block/view_categories_link.phtml" after="city_product_list" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.freeshipping.info" as="freeshipping_info" template="GiftGroup_GeoPage::city/view/block/free_shipping_info.phtml" after="view_categories_link_bottom" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.same.day.delivery.info" as="same_day_delivery_info" template="GiftGroup_GeoPage::city/view/block/same_day_delivery_info.phtml" after="freeshipping_info" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.next.day.delivery.info" as="next_day_delivery_info" template="GiftGroup_GeoPage::city/view/block/next_day_delivery_info.phtml" after="same_day_delivery_info" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.any.day.delivery.info" as="any_day_delivery_info" template="GiftGroup_GeoPage::city/view/block/any_day_delivery_info.phtml" after="next_day_delivery_info" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.review.products" as="review_products" template="GiftGroup_GeoPage::city/view/block/review_products.phtml" after="any_day_delivery_info">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\ReviewProductListBlock</argument>
+                        </arguments>
+                   </block>
+                   <block class="GiftGroup\GeoPage\Block\CityPage\PopularProducts" name="city.page.view.popular.products" as="popular_products" template="GiftGroup_GeoPage::city/view/block/popular_products.phtml" after="review_products">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\PopularProducts</argument>
+                        </arguments>
+                        <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                            <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                        </block>
+                   </block>
+                   <block class="GiftGroup\GeoPage\Block\CityPage\FAQ" name="city.page.view.faq" as="city_faq" template="GiftGroup_GeoPage::city/view/block/faq.phtml" after="popular_products">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">GiftGroup\GeoPage\ViewModel\FAQBlock</argument>
+                        </arguments>
+                   </block>
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.city.category.pages" as="city_category_pages" template="GiftGroup_GeoPage::city/view/block/category_page_list.phtml" after="city_faq" />
+                   <block class="Magento\Framework\View\Element\Template" name="city.page.view.realted.cities" as="related_cities" template="GiftGroup_GeoPage::city/view/block/related_cities.phtml" after="city_category_pages" />-->
+            </block>
+        </referenceContainer>
+    </body>
+</page>

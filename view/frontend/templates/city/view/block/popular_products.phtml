@@ -1,0 +1,57 @@
+<?php
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+?>
+<?php
+$viewModel = $block->getViewModel();
+if($viewModel->showPopularProductsBlock()):
+    $popularProducts = $viewModel->getProducts();
+    if ($popularProducts->getSize()):
+        $cityName = $viewModel->getCityName();
+?>
+        <div class="mainContainer block-content popular-products width-80">
+            <div class="block-title">
+                <h3><?= $viewModel->getPopularProductsBlockTitle() ?></h3>
+                <div class="heading-divider heading-divider--short"></div>
+            </div>
+            <div class="content">
+                <table class="items">
+                    <tbody>
+                        <tr class="header">
+                            <th></th>
+                            <th><?= __('Name')?></th>
+                            <th><?= __('Price from')?></th>
+                        </tr>
+                        <?php foreach ($popularProducts as $product) : ?>                           
+                            <tr class="data">
+                                <td>
+                                    <?php $productImage = $viewModel->getProductImage($product); ?>
+                                    <?= $productImage->toHtml(); ?>
+                                </td>
+                                <td>
+                                    <?php $productName = $escaper->escapeHtmlAttr($product->getName()) . ' in '. $cityName; ?>
+                                    <a class="product-item-link"
+                                        title="<?= $productName ?>"
+                                        href="<?= $escaper->escapeUrl($block->getProductUrl($product)) ?>">
+                                        <?= $productName ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?= /* @noEscape */ $block->getProductPrice($product) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>  
+            </div>
+        </div>
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "Table",
+            "about": "<?= $viewModel->getPopularProductsBlockTitle() ?>"
+            }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,14 @@
+<?php
+$viewModel = $block->getViewModel();
+$storeId = $viewModel->getCurrentStoreId();
+$additionalStyles = $viewModel->getAdditionalStyles($storeId);
+$externalLinksData = $viewModel->getExternalLinksData($storeId);
+?>
+<?php if ($externalLinksData): ?>    
+    <?= $externalLinksData ?>
+<?php endif; ?>
+<?php if ($additionalStyles): ?>
+    <style>
+        <?= $additionalStyles ?>
+    </style>
+<?php endif; ?>

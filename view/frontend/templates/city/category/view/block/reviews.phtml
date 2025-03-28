@@ -1,0 +1,111 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+$viewModel = $block->getViewModel();
+$format = \IntlDateFormatter::SHORT;
+if ($viewModel->showReviewProductsBlock()) :
+    $productReviews = $viewModel->getProductsReviews();
+    if (count($productReviews)) :
+?>
+        <?php $viewMode = 'grid'; ?>
+        <div class="mainContainer block-content reviews">
+            <div class="block-title">
+                <h3><?= __('What customers are saying') ?></h3>
+                <div class="heading-divider heading-divider--short"></div>
+            </div>
+            <div class="content">
+                <div class="items review-carousel">
+                    <?php foreach ($productReviews as $_review) : ?>
+                    <figure class="review-item item-<?= $_review->getData('review_id') ?>">
+                        <figcaption>
+                            <div class="title" itemprop="name">
+                                <strong><?= $escaper->escapeHtml($_review->getTitle()) ?></strong>
+                            </div>
+                            <blockquote>
+                                <p>
+                                    <?php 
+                                        $firstPart = substr($_review->getDetail(), 0, 220);
+                                        $readMorePart = substr($_review->getDetail(), 220);
+                                    ?>
+                                    <?= /* @noEscape */ nl2br($escaper->escapeHtml($firstPart)) ?>                                    
+                                    <?= $readMorePart ? '<span class="read-more-content close">' . nl2br($escaper->escapeHtml($readMorePart)) . '</span>' : '' ?>
+                                    <?= $readMorePart ? '<a href="javascript:void(0)" class="review-read-more" style="color:blue;">read more..</a>' : '' ?>
+                                </p>
+                            </blockquote>
+                            <span class="name"><?= $escaper->escapeHtml($_review->getNickname()) ?></span>
+                            <div class="date-published-info">
+                                <?php $publishedDate = $block->formatDate($_review->getCreatedAt(),$format); ?>
+                                <time class="review-details-value" itemprop="datePublished" datetime="<?= $escaper->escapeHtmlAttr($publishedDate) ?>">
+                                    <?= $escaper->escapeHtml($publishedDate) ?>
+                                </time>
+                            </div>
+                            <?php $reviewSummary = $viewModel->getRatingSummary($_review->getData('review_id')); ?>
+                            <?php if ($reviewSummary->getCount()): ?>
+                                <div class="second-row star-rating">
+                                    <div class="rating-box">
+                                        <div class="rating"></div>
+                                    </div>
+                                    <?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                                        "width:" . /* @noEscape */ ceil($reviewSummary->getSum() /
+                                            ($reviewSummary->getCount())) . "%;",
+                                        'div.rating-box div.rating'
+                                    ) ?>
+                                </div>
+                            <?php endif; ?>
+                        </figcaption>
+                    </figure>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<script>
+require(['jquery', 'geopage_owlcarousel'], function($) {
+    $(document).ready(function() {
+        $('.review-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            items: 3,
+            autoplay: true,
+            autoplayHoverPause: true,
+            autoplayTimeout: 1000,
+            itemsDesktop: 3,
+            itemsDesktopSmall: 2,
+            itemsTablet: 2,
+            itemsTabletSmall: 1,
+            itemsMobile: 1,
+            responsive: {
+                0: {
+                items: 1
+                },
+                600: {
+                items: 2
+                },
+                1000: {
+                items: 3
+                },
+                1000: {
+                items: 3
+                }
+            }
+        });
+        $('.block-content.reviews a.review-read-more').on('click', function() {
+            var contentElm = $(this).prev();
+            if (contentElm.hasClass('close')) {
+                contentElm.removeClass('close');
+                contentElm.addClass('open');
+                $(this).text('read less');
+            } else if (contentElm.hasClass('open')) {
+                contentElm.removeClass('open');
+                contentElm.addClass('close');
+                $(this).text('read more...');
+            }
+        });
+    });
+});
+</script>

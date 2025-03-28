@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="GiftGroup_SEO::parent">
+                    <resource id="GiftGroup_GeoPage::geopage" title="Geo Pages" translate="title"
+                              sortOrder="120">
+                        <resource id="GiftGroup_GeoPage::city" title="City Management" translate="title"
+                                  sortOrder="1"/>
+                        <resource id="GiftGroup_GeoPage::city_import" title="City Import" translate="title"
+                                  sortOrder="2"/>
+                        <resource id="GiftGroup_GeoPage::city_page" title="City Pages" translate="title"
+                                  sortOrder="3"/>
+                        <resource id="GiftGroup_GeoPage::category_page" title="Category Pages" translate="title"
+                                  sortOrder="4"/>
+                        <resource id="GiftGroup_GeoPage::state" title="States" translate="title"
+                                  sortOrder="5"/>
+                        <resource id="GiftGroup_GeoPage::state_page" title="State Pages" translate="title"
+                                  sortOrder="6"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="GiftGroup_GeoPage::geo_page_config" title="Geo Page Configuration" sortOrder="100100"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

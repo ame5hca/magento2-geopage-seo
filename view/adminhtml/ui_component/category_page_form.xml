@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                category_page_form.category_page_form_data_source
+            </item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Category Page</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="GiftGroup\GeoPage\Block\Adminhtml\CategoryPage\Edit\SaveButton"/>            
+            <button name="save_and_continue" class="GiftGroup\GeoPage\Block\Adminhtml\CategoryPage\Edit\SaveAndContinueButton"/>                        
+            <button name="delete" class="GiftGroup\GeoPage\Block\Adminhtml\CategoryPage\Edit\DeleteButton"/>
+            <button name="back" class="GiftGroup\GeoPage\Block\Adminhtml\CategoryPage\Edit\BackButton"/>
+        </buttons>
+        <namespace>category_page_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>category_page_form.category_page_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="category_page_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="geopage/categorypage/save"/>
+        </settings>
+        <dataProvider class="GiftGroup\GeoPage\Ui\CategoryPage\Component\Form\DataProvider"
+                      name="category_page_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label>General Details</label>
+        </settings>
+        <field name="id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>id</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Page</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="city_id" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>int</dataType>                
+                <label translate="true">City</label>
+                <dataScope>city_id</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="GiftGroup\GeoPage\Model\Config\Source\Cities"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>        
+        <field name="store_id" formElement="select" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\StoreView">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>int</dataType>
+                <label translate="true">Store View</label>
+                <dataScope>store_id</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>  
+        <field name="category_id" formElement="select" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\ReadOnlyOnEdit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="source" xsi:type="string">category_page</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Category</label>
+                <dataScope>category_id</dataScope>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Catalog\Ui\Component\Product\Form\Categories\Options"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>      
+        <field name="description" formElement="wysiwyg">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                </item>
+            </argument>
+            <settings>
+                <label>Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="seo">
+        <settings>
+            <label>SEO</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+        <field name="meta_title" formElement="input" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Meta Title</label>
+                <dataScope>meta_title</dataScope>
+            </settings>
+        </field>
+        <field name="meta_description" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Meta Description</label>
+                <dataScope>meta_description</dataScope>
+            </settings>
+        </field>
+        <field name="meta_robot" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category_page</item>
+                    <item name="default" xsi:type="string">INDEX,FOLLOW</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Meta Robot</label>
+                <dataScope>meta_robot</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="GiftGroup\GeoPage\Model\Config\Source\MetaRobots" />
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="page_content_blocks">
+        <settings>
+            <label>Page Content Blocks</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+        </settings>
+        <htmlContent name="content_shortcode_usage_info">
+            <block class="Magento\Framework\View\Element\Template" 
+                name="content_shortcode_usage_info" 
+                template="GiftGroup_GeoPage::city/form/shortcode_usage_tooltip.phtml" />
+        </htmlContent>        
+        <fieldset name="slider_block">
+            <settings>
+                <label>Slider Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="slider_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>slider_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="slider_id" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>int</dataType>                
+                    <label translate="true">Slider</label>
+                    <dataScope>slider_id</dataScope>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="GiftGroup\GeoPage\Model\Config\Source\SelectSlider"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <field name="slider" formElement="wysiwyg">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label>Slider</label>
+                    <dataScope>slider</dataScope>
+                </settings>
+                <formElements>
+                    <wysiwyg>
+                        <settings>
+                            <wysiwyg>true</wysiwyg>
+                        </settings>
+                    </wysiwyg>
+                </formElements>
+            </field>
+        </fieldset>        
+        <fieldset name="block2">
+            <settings>
+                <label>Block 2(content block)</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="block2_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>block2_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="block2_content_title" formElement="input" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Title</label>
+                    <dataScope>block2_content_title</dataScope>
+                </settings>
+            </field>
+            <field name="block2_content" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Content</label>
+                    <dataScope>block2_content</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="block3">
+            <settings>
+                <label>Block 3(product carousel)</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="block3_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>block3_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="block3_title" formElement="input" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Title</label>
+                    <dataScope>block3_title</dataScope>
+                </settings>
+            </field>
+            <field name="block3_category" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="componentType" xsi:type="string">field</item>
+                        <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="multiple" xsi:type="boolean">true</item>
+                        <item name="source" xsi:type="string">category_page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Categories</label>
+                    <dataScope>block3_category</dataScope>
+                    <visible>true</visible>
+                    <notice>If categories are selected, then random products from these categories will be displayed in frotnend as a carousel. Else random products from all categories of the website is displayed.</notice>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Magento\Catalog\Ui\Component\Product\Form\Categories\Options"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+        </fieldset>
+        <fieldset name="three_column_block">
+            <settings>
+                <label>3 Column Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="three_col_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>three_col_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="three_col_block_col1" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Column1 Content</label>
+                    <dataScope>three_col_block_col1</dataScope>
+                </settings>
+            </field>
+            <field name="three_col_block_col2" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Column2 Content</label>
+                    <dataScope>three_col_block_col2</dataScope>
+                </settings>
+            </field>
+            <field name="three_col_block_col3" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Column3 Content</label>
+                    <dataScope>three_col_block_col3</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="send_gift_block">
+            <settings>
+                <label>Send Gift Info Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="send_gift_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>send_gift_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="send_gift_block_content" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Content</label>
+                    <dataScope>send_gift_block_content</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="product_list_block">
+            <settings>
+                <label>Products List Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="product_limit" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="string">16</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Product Limit</label>
+                    <dataScope>product_limit</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="free_shipping_block">
+            <settings>
+                <label>Free Shipping Info Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="free_shipping_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>free_shipping_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="free_shipping_block_content" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Content</label>
+                    <dataScope>free_shipping_block_content</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="same_day_delivery_block">
+            <settings>
+                <label>Same Day Delivery Info Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="same_day_delivery_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>same_day_delivery_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="same_day_delivery_block_content" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Content</label>
+                    <dataScope>same_day_delivery_block_content</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="next_day_delivery_block">
+            <settings>
+                <label>Next Day Delivery Info Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="next_day_delivery_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>next_day_delivery_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="next_day_delivery_block_content" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Content</label>
+                    <dataScope>next_day_delivery_block_content</dataScope>
+                </settings>
+            </field>
+        </fieldset> 
+        <fieldset name="any_day_delivery_block">
+            <settings>
+                <label>Any Day Delivery Info Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="any_day_delivery_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Status</label>
+                    <dataScope>any_day_delivery_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="any_day_delivery_block_title" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Title</label>
+                    <dataScope>any_day_delivery_block_title</dataScope>
+                </settings>
+            </field>
+            <field name="any_day_delivery_block_content" formElement="textarea" class="GiftGroup\GeoPage\Ui\City\Component\Form\Field\DefaultValue">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="rows" xsi:type="number">8</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Content</label>
+                    <dataScope>any_day_delivery_block_content</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="what_customers_saying_block">
+            <settings>
+                <label>What Customers Saying Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="review_product_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Show Block</label>
+                    <dataScope>review_product_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="review_product_limit" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="string">10</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Product Limit</label>
+                    <dataScope>review_product_limit</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="popular_products_block">
+            <settings>
+                <label>Popular Products Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="popular_product_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Show Block</label>
+                    <dataScope>popular_product_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="popular_product_limit" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="string">6</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Product Limit</label>
+                    <dataScope>popular_product_limit</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="faq_block">
+            <settings>
+                <label>FAQ Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="faq_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Show Block</label>
+                    <dataScope>faq_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+        </fieldset>
+        <fieldset name="category_city_block">
+            <settings>
+                <label>Category City List (Often Asked) Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="category_city_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Show Block</label>
+                    <dataScope>category_city_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="category_city_page_limit" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="string">15</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Limit</label>
+                    <dataScope>category_city_page_limit</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="related_city_block">
+            <settings>
+                <label>Related City List (Major Delivery Areas) Block</label>
+                <collapsible>true</collapsible>
+                <opened>false</opened>
+            </settings>
+            <field name="related_city_block_status" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Show Block</label>
+                    <dataScope>related_city_block_status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="related_city_limit" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category_page</item>
+                        <item name="default" xsi:type="string">30</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Limit</label>
+                    <dataScope>related_city_limit</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+    </fieldset>
+</form>

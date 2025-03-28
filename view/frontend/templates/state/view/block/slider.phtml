@@ -1,0 +1,11 @@
+<?php
+$viewModel = $block->getParentBlock()->getViewModel();
+if ($viewModel->showSlider()):
+    $sliderContent = $viewModel->getSlider();
+    if ($sliderContent):
+?>
+        <div class="mainContainer block-content city-view slider home-banner">
+            <?= $sliderContent ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

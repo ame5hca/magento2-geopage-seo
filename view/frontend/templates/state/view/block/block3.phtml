@@ -1,0 +1,92 @@
+<?php
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+?>
+<?php
+$viewModel = $block->getViewModel();
+if($viewModel->showBlock()):
+    $products = $viewModel->getProducts();
+    if ($products->getSize()):
+?>
+        <?php $viewMode = 'grid'; ?>
+        <div class="mainContainer block-content products-list-carousel block3 geopage-block-owl-carousel">
+            <div class="block-title">
+                <span><?= $viewModel->getTitle() ?></span>
+                <div class="heading-divider heading-divider--short"></div>
+            </div>
+            <div class="content">
+                <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+                    <ol class="products list items product-items block3-product-carousel">
+                        <?php foreach ($products as $product) : ?>
+                            <li class="item product product-item">
+                                <div class="product-image__wrapper">
+                                    <div class="product-item-info" data-container="product-<?= /* @noEscape */ $viewMode ?>">
+                                        <?php
+                                        $productImage = $viewModel->getProductImage($product);
+                                        ?>
+                                        <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>" class="product photo product-item-photo" tabindex="-1">
+                                            <?= $productImage->toHtml() ?>
+                                        </a>
+                                    </div>
+                                    <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>" tabindex="-1">
+                                        <div class="thumbnail-overlay__container">
+                                            <div class="quick-shop__info animated fadeInDown">
+                                                <div class="thumbnail-overlay">
+                                                    <div class="info text-align-center">
+                                                        <div class="product-thumbnail">
+                                                            <span class="product-thumbnail__title">
+                                                                <?= /* @noEscape */ $product->getName() ?>
+                                                            </span>
+                                                            <span class="product-thumbnail__price price ">
+                                                                <span class="money">
+                                                                    <?= /* @noEscape */ $viewModel->getPrice($product) ?>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="quick-shop__buttons animated fadeInUp">
+                                                <span class="quick_shop button action_button">
+                                                    <?= __('View')?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<script>
+require(['jquery', 'geopage_owlcarousel'], function($) {
+    $(document).ready(function() {
+        $('.block3-product-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            navigation: true,
+            items: 5,
+            autoplay: true,
+            pagination: false,
+            autoplayHoverPause: true,
+            autoplayTimeout: 1000,
+            responsive: {
+                0: {
+                items: 1
+                },
+                600: {
+                items: 3
+                },
+                1000: {
+                items: 5
+                }
+            }
+        });
+    });
+});
+</script>

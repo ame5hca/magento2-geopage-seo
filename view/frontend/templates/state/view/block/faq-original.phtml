@@ -1,0 +1,67 @@
+<?php
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+?>
+<?php
+$viewModel = $block->getViewModel();
+if($viewModel->showFaqBlock()):
+    $cityName = $viewModel->getCityName();
+    $popularProducts = $viewModel->getPopularProducts();
+?>
+    <div class="mainContainer block-content faq">
+        <div class="block-title">
+            <h3><?= __('Frequently Asked Questions') ?></h3>
+            <div class="heading-divider heading-divider--short"></div>
+        </div>
+        <div class="content">
+            <div class="faq-wrapper" itemscope itemtype="https://schema.org/FAQPage">
+                <div class="faq-content"
+                    data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": true}}'>                    
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div data-role="collapsible">
+                            <div class="faq-question" data-role="trigger">                        
+                                <h4 itemprop="name"><?= __('What are the most popular in %1', $cityName)?>
+                                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="faq-answer" data-role="content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <?php if ($popularProducts->getSize()): ?>
+                                <ol itemprop="text">
+                                <?php foreach ($popularProducts as $item): ?>
+                                <li><a class="product-item-link"
+                                        title="<?= $escaper->escapeHtmlAttr($item->getName()) ?>"
+                                        href="<?= $escaper->escapeUrl($block->getProductUrl($item)) ?>">
+                                        <?= $escaper->escapeHtml($item->getName()) ?>
+                                    </a></li>
+                                <?php endforeach; ?>
+                                </ol>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div data-role="collapsible">
+                            <div class="faq-question" data-role="trigger">                        
+                                <h4 itemprop="name"><?= __(
+                                    'How long does it take to get %1Gift Basket delivered in %2, %3, %4?', 
+                                    $viewModel->getCategoryName() . ' ',
+                                    $cityName,
+                                    $viewModel->getRegionName(),
+                                    $viewModel->getCountryName()
+                                )?>
+                                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="faq-answer" data-role="content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <p itemprop="text"><?= __('It entirely depends on the delivery option you selected during the checkout – same-day or next-day delivery in %1.', $cityName) ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

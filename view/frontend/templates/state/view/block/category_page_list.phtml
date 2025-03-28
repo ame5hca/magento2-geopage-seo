@@ -1,0 +1,64 @@
+<?php
+$viewModel = $block->getViewModel();
+if ($viewModel->showCategoryPageList()) :
+    $categories = $viewModel->getCityCategories();
+    $city = $viewModel->getCity();
+    if ($categories) :
+?>
+        <div class="mainContainer block-content city-category-page-list width-80">
+            <div class="block-title">
+                <span><?= $viewModel->getCategoryPageBlockTitle() ?></span>
+                <div class="heading-divider heading-divider--short"></div>
+            </div>
+            <div class="content">
+                <div class="carousel-wrap">
+                    <div class="owl-carousel category-page-list-carousel">
+                        <?php foreach ($categories as $category) : ?>
+                            <div class="item">
+                                <?php 
+                                    $itemName = __('%1 Gift Basket', ucwords($category->getCategoryName())); 
+                                    $image = $viewModel->getImage($category->getData('category_id'));
+                                ?>
+                                <a href="<?= $block->getBaseUrl() . $category->getUrl() ?>" title="<?= $itemName ?>">
+                                    <div class="image">
+                                        <?= $image ? $image->toHtml() : '' ?>
+                                    </div>
+                                    <div class="label">
+                                        <span><?= $itemName ?></span>
+                                    </div>
+                                </a>                              
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<script>
+    require(['jquery', 'geopage_owlcarousel'], function($) {
+        $(document).ready(function() {
+            $('.category-page-list-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                items: 4,
+                autoplay: true,
+                dotsEach: 7,
+                responsiveClass:true,
+                autoplayTimeout: 1000,
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+        });
+    });
+</script>

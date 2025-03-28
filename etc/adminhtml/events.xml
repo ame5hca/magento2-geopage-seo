@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--<event name="giftgroup_geopage_city_save_after">
+        <observer name="add_url_redirect_city" instance="GiftGroup\GeoPage\Observer\AddCityPageUrlRedirect" />
+    </event>-->
+    <event name="giftgroup_geopage_new_city_page_generated">
+        <observer name="add_url_redirects_for_entity" instance="GiftGroup\GeoPage\Observer\AddUrlRedirect" />
+    </event>
+    <event name="giftgroup_geopage_city_page_save_after">
+        <observer name="add_url_redirect_city_page" instance="GiftGroup\GeoPage\Observer\AddUrlRedirect" />
+    </event>
+    <event name="giftgroup_geopage_state_page_save_after">
+        <observer name="add_url_redirect_state_page" instance="GiftGroup\GeoPage\Observer\AddStatePageUrlRedirect" />
+    </event>
+    <event name="giftgroup_geopage_new_category_page_generated">
+        <observer name="add_url_redirect_city_category_page" instance="GiftGroup\GeoPage\Observer\AddCategoryUrlRedirect" />
+    </event>
+    <event name="giftgroup_geopage_category_page_save_after">
+        <observer name="add_url_redirect_city_category_page_save" instance="GiftGroup\GeoPage\Observer\AddCategoryUrlRedirect" />
+    </event>
+    <event name="geopage_city_delete_after">
+        <observer name="delete_url_redirect_of_city" instance="GiftGroup\GeoPage\Observer\DeleteCityPageUrlRedirect" />
+    </event>
+</config>

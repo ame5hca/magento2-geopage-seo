@@ -1,0 +1,17 @@
+<?php
+$viewModel = $block->getParentBlock()->getViewModel();
+if($viewModel->showFreeShippingInfo()):
+    $content = $viewModel->getFreeShippingContent();
+    if ($content):
+?>
+        <div class="mainContainer block-content free-shipping-info width-80">
+            <div class="block-title">
+                <h2><?= $viewModel->getFreeShippingBlockTitle() ?></h2>
+                <div class="heading-divider heading-divider--short"></div>
+            </div>
+            <div class="content">
+                <p><?= $content ?></p>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,113 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+$viewModel = $block->getViewModel();
+$format = \IntlDateFormatter::SHORT;
+if ($viewModel->showReviewProductsBlock()) :
+    $productReviews = $viewModel->getProductsReviews();
+    if (count($productReviews)) :
+?>
+        <?php $viewMode = 'grid'; ?>
+        <div class="mainContainer block-content review-products-list">
+            <div class="block-title">
+                <h3><?= __('What customers are saying') ?></h3>
+            </div>
+            <div class="content">
+                <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+                    <ol class="products list items product-items review-product-carousel">
+                        <?php foreach ($productReviews as $_review) : ?>
+                            <?php $product = $viewModel->getProduct($_review->getData('entity_pk_value')); ?>
+                            <?php if ($product == null) : continue;
+                            endif; ?>
+                            <li class="item product product-item review-<?= $_review->getData('review_id') ?>" itemscope itemprop="review" itemtype="http://schema.org/Review">
+                                <div class="product-item-info" data-container="product-<?= /* @noEscape */ $viewMode ?>">
+                                    <?php
+                                    $productImage = $viewModel->getProductImage($product);
+                                    ?>
+                                    <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>" class="product photo product-item-photo" tabindex="-1">
+                                        <?= $productImage->toHtml() ?>
+                                    </a>
+                                    <div class="product details product-item-details">
+                                        <strong class="name">
+                                            <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>">
+                                                <?= /* @noEscape */ $product->getName() ?>
+                                            </a>
+                                        </strong>
+                                    </div>
+                                    <div class="product review">
+                                        <div class="first-row name-date">
+                                            <div class="reviewer-name"><?= $escaper->escapeHtml($_review->getNickname()) ?></div>
+                                            <div class="date-added">
+                                                <time class="review-details-value" itemprop="datePublished" datetime="<?= $escaper->escapeHtmlAttr($block->formatDate(
+                                                                                                                            $_review->getCreatedAt(),
+                                                                                                                            $format
+                                                                                                                        )) ?>">
+                                                    <?= $escaper->escapeHtml(
+                                                        $block->formatDate(
+                                                            $_review->getCreatedAt(),
+                                                            $format
+                                                        )
+                                                    ) ?>
+                                                </time>
+                                            </div>
+                                        </div>
+                                        <?php $reviewSummary = $viewModel->getRatingSummary($_review->getData('review_id')); ?>
+                                        <?php if ($reviewSummary->getCount()): ?>
+                                            <div class="second-row star-rating">
+                                                <div class="rating-box">
+                                                    <div class="rating"></div>
+                                                </div>
+                                                <?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                                                    "width:" . /* @noEscape */ ceil($reviewSummary->getSum() /
+                                                        ($reviewSummary->getCount())) . "%;",
+                                                    'div.rating-box div.rating'
+                                                ) ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="third-row comment">
+                                            <div class="title" itemprop="name">
+                                                <strong><?= $escaper->escapeHtml($_review->getTitle()) ?></strong>
+                                            </div>
+                                            <div class="content" itemprop="description">
+                                                <?= /* @noEscape */ nl2br($escaper->escapeHtml($_review->getDetail())) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<script>
+require(['jquery', 'geopage_owlcarousel'], function($) {
+    $(document).ready(function() {
+        $('.review-product-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            items: 5,
+            autoplay: true,
+            autoplayHoverPause: true,
+            autoplayTimeout: 1000,
+            responsive: {
+                0: {
+                items: 1
+                },
+                600: {
+                items: 3
+                },
+                1000: {
+                items: 5
+                }
+            }
+        });
+    });
+});
+</script>

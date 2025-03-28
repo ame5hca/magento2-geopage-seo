@@ -1,0 +1,41 @@
+
+<?php
+$viewModel = $block->getViewModel();
+$cityCollection = $viewModel->getAllCities();
+?>
+<div class="main-content city-hub-page">
+    <div class="block-title">
+        <h1 class="section-heading text-center margin-bottom-none bold">
+            <?= __('Gift Basket Delivery Areas by City')?>
+        </h1>
+    </div>
+    <div class="block-content">
+        <?php if (!count($cityCollection)): ?>
+            <div class="warning-message message">
+                <p><?= __('No cities.')?></p>
+            </div>
+        <?php else: ?>
+            <?php foreach ($cityCollection as $stateId => $cityPages): ?>
+                <?php $statePage = $viewModel->getStatePage($stateId); ?>
+                
+                <div class="state-page link">                    
+                    <?php if ($statePage): ?>
+                        <a href="<?= $block->getBaseUrl() . $statePage->getUrl() ?>" class="state-link"><?= __($statePage->getData('state_name'))?></a>
+                    <?php else: ?>
+                        <?= __($cityPages[0]['state_name'])?>
+                    <?php endif; ?>
+                    </div>
+                
+                <ul class="cities-list">
+                    <?php foreach ($cityPages as $city): ?>
+                        <li>
+                            <a href="<?= $block->getBaseUrl() . $city->getUrl() ?>" class="city-link">
+                                <?= $city->getData('city_name') . ' ' . 'Gift Baskets'  ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>

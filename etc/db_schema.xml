@@ -1,0 +1,409 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="giftgroup_cities" resource="default" engine="innodb" comment="Cities">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="City Name"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="255" comment="City Code"/>
+        <column xsi:type="varchar" name="country_id" nullable="false" length="50" comment="Country Code"/>
+        <column xsi:type="varchar" name="region" nullable="true" length="255" comment="Region"/>
+        <column xsi:type="varchar" name="categories" nullable="true" length="255" comment="Categories"/>
+        <column xsi:type="varchar" name="page_store_id" nullable="true" length="255" comment="Store Ids For Ganerate Page"/>
+        <column xsi:type="mediumtext" name="description" nullable="true" comment="City Page Description"/>
+        <column xsi:type="text" name="meta_title" nullable="true" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="varchar" name="meta_robot" nullable="false" length="255" comment="Meta Robot"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is City Active"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="smallint" name="is_page_generated" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is Page Generated"/>
+        <column xsi:type="smallint" name="display_on_homepage" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Display on home page"/>
+        <column xsi:type="mediumtext" name="slider" nullable="true" comment="Slider"/>
+        <column xsi:type="text" name="send_gift_block_content" nullable="true" comment="Send Gift Block Content"/>
+        <column xsi:type="text" name="free_shipping_block_content" nullable="true" comment="Free Shipping Block Content"/>
+        <column xsi:type="text" name="same_day_delivery_block_content" nullable="true" comment="Same Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="next_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Next Day Delivery Block Status"/>
+        <column xsi:type="text" name="next_day_delivery_block_content" nullable="true" comment="Next Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="any_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Any Day Delivery Block Status"/>
+        <column xsi:type="varchar" name="any_day_delivery_block_title" nullable="false" length="255" comment="Any Day Delivery Block Title"/>
+        <column xsi:type="text" name="any_day_delivery_block_content" nullable="true" comment="Any Day Delivery Block Content"/>
+        <column xsi:type="int" name="product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Product List Limit"/>
+        <column xsi:type="int" name="popular_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Popular Product List Limit"/>
+        <column xsi:type="int" name="review_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Review Block Product Limit"/>
+        <column xsi:type="int" name="category_city_page_limit" unsigned="true" nullable="true" identity="false"
+                comment="Category City Page Limit"/>
+        <column xsi:type="int" name="related_city_limit" unsigned="true" nullable="true" identity="false"
+                comment="Related City List Limit"/>
+        <column xsi:type="smallint" name="slider_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Slider Block Status"/>
+        <column xsi:type="smallint" name="send_gift_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Send Gift Block Status"/>
+        <column xsi:type="smallint" name="free_shipping_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Free Shipping Block Status"/>
+        <column xsi:type="smallint" name="same_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Same Day Delivery Block Status"/>
+        <column xsi:type="smallint" name="review_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Review Products Block Status"/>
+        <column xsi:type="smallint" name="popular_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Popular Products Block Status"/>
+        <column xsi:type="smallint" name="faq_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="FAQ Block Status"/>
+        <column xsi:type="smallint" name="category_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Category City List Block Status"/>
+        <column xsi:type="smallint" name="related_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Related City List Block Status"/>
+        <!--<column xsi:type="varchar" name="faq" nullable="true" length="255" comment="FAQ ids"/>-->
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"/>
+        <column xsi:type="int" name="slider_id" unsigned="true" nullable="true" identity="false"
+                comment="Slider ID"/>
+        <column xsi:type="smallint" name="block2_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 2 Status"/>
+        <column xsi:type="varchar" name="block2_content_title" nullable="false" length="255" comment="Text block 2 title"/>
+        <column xsi:type="text" name="block2_content" nullable="true" comment="Text block 2 content"/>
+        <column xsi:type="smallint" name="block3_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 3 Status"/>
+        <column xsi:type="varchar" name="block3_title" nullable="false" length="255" comment="Product carousel block title"/>
+        <column xsi:type="varchar" name="block3_category" nullable="true" length="255" comment="Product carousel category ids"/>
+        <column xsi:type="smallint" name="three_col_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="3 Column block status"/>
+        <column xsi:type="text" name="three_col_block_col1" nullable="false" comment="Column 1 content"/>
+        <column xsi:type="text" name="three_col_block_col2" nullable="false" comment="Column 2 content"/>
+        <column xsi:type="text" name="three_col_block_col3" nullable="false" comment="Column 3 content"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITIES_STORE_ID_STORE_STORE_ID" table="giftgroup_cities"
+                column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="NO ACTION"/>
+        <constraint xsi:type="unique" referenceId="GIFTGROUP_CITIES_CODE">
+            <column name="code"/>
+        </constraint>
+        <index referenceId="GIFTGROUP_CITIES_NAME_CODE" indexType="fulltext">
+            <column name="name"/>
+            <column name="code"/>
+        </index>
+        <index referenceId="GIFTGROUP_CITIES_NAME" indexType="btree">
+            <column name="name"/>
+        </index>
+        <index referenceId="GIFTGROUP_CITIES_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="giftgroup_city_page" resource="default" engine="innodb" comment="City Page Contents And Configurations">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="int" name="city_id" unsigned="true" nullable="false" identity="false"
+                comment="City ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="int" name="state_id" unsigned="true" nullable="false" identity="false"
+                comment="State ID"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is City Page Active"/>     
+        <column xsi:type="varchar" name="city_name" nullable="false" length="255" comment="City Name"/>
+        <column xsi:type="varchar" name="categories" nullable="true" length="255" comment="Categories"/>
+        <column xsi:type="mediumtext" name="description" nullable="true" comment="City Page Description"/>
+        <column xsi:type="text" name="meta_title" nullable="true" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="varchar" name="meta_robot" nullable="false" length="255" comment="Meta Robot"/>
+        <column xsi:type="text" name="product_ids" nullable="true" comment="Product Ids"/>
+        <column xsi:type="int" name="product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Product List Limit"/>
+        <column xsi:type="smallint" name="slider_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Slider Block Status"/>
+        <column xsi:type="mediumtext" name="slider" nullable="true" comment="Slider"/>
+        <column xsi:type="smallint" name="send_gift_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Send Gift Block Status"/>
+        <column xsi:type="text" name="send_gift_block_content" nullable="true" comment="Send Gift Block Content"/>
+        <column xsi:type="smallint" name="free_shipping_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Free Shipping Block Status"/>
+        <column xsi:type="text" name="free_shipping_block_content" nullable="true" comment="Free Shipping Block Content"/>
+        <column xsi:type="smallint" name="same_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Same Day Delivery Block Status"/>
+        <column xsi:type="text" name="same_day_delivery_block_content" nullable="true" comment="Same Day Delivery Block Content"/>        
+        <column xsi:type="smallint" name="next_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Next Day Delivery Block Status"/>
+        <column xsi:type="text" name="next_day_delivery_block_content" nullable="true" comment="Next Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="any_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Any Day Delivery Block Status"/>
+        <column xsi:type="varchar" name="any_day_delivery_block_title" nullable="false" length="255" comment="Any Day Delivery Block Title"/>
+        <column xsi:type="text" name="any_day_delivery_block_content" nullable="true" comment="Any Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="popular_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Popular Products Block Status"/>
+        <column xsi:type="int" name="popular_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Popular Product List Limit"/>
+        <column xsi:type="smallint" name="review_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Review Products Block Status"/>
+        <column xsi:type="int" name="review_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Review Block Product Limit"/>
+        <column xsi:type="smallint" name="category_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Category City List Block Status"/>
+        <column xsi:type="int" name="category_city_page_limit" unsigned="true" nullable="true" identity="false"
+                comment="Category City Page Limit"/>
+        <column xsi:type="smallint" name="related_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Related City List Block Status"/>
+        <column xsi:type="int" name="related_city_limit" unsigned="true" nullable="true" identity="false"
+                comment="Related City List Limit"/>
+        <column xsi:type="smallint" name="faq_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="FAQ Block Status"/>        
+        <!--<column xsi:type="varchar" name="faq" nullable="true" length="255" comment="FAQ ids"/>-->
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"/>
+        <column xsi:type="int" name="slider_id" unsigned="true" nullable="true" identity="false"
+                comment="Slider ID"/>
+        <column xsi:type="smallint" name="block2_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 2 Status"/>
+        <column xsi:type="varchar" name="block2_content_title" nullable="false" length="255" comment="Text block 2 title"/>
+        <column xsi:type="text" name="block2_content" nullable="true" comment="Text block 2 content"/>
+        <column xsi:type="smallint" name="block3_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 3 Status"/>
+        <column xsi:type="varchar" name="block3_title" nullable="false" length="255" comment="Product carousel block title"/>
+        <column xsi:type="varchar" name="block3_category" nullable="true" length="255" comment="Product carousel category ids"/>
+        <column xsi:type="smallint" name="three_col_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="3 Column block status"/>
+        <column xsi:type="text" name="three_col_block_col1" nullable="false" comment="Column 1 content"/>
+        <column xsi:type="text" name="three_col_block_col2" nullable="false" comment="Column 2 content"/>
+        <column xsi:type="text" name="three_col_block_col3" nullable="false" comment="Column 3 content"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITY_PAGE_STORE_ID_STORE_STORE_ID" table="giftgroup_city_page"
+                column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="NO ACTION"/>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITY_PAGE_CITY_ID_GIFTGROUP_CITIES_ID" table="giftgroup_city_page"
+                column="city_id" referenceTable="giftgroup_cities" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITY_PAGE_STATE_ID_GIFTGROUP_STATES_ID" table="giftgroup_city_page"
+                column="state_id" referenceTable="giftgroup_states" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="GIFTGROUP_CITY_CITY_ID_STORE_ID">
+            <column name="city_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="GIFTGROUP_CITY_CITY_NAME" indexType="fulltext">
+            <column name="city_name"/>
+        </index>
+        <index referenceId="GIFTGROUP_CITY_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="GIFTGROUP_CITY_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+    <table name="giftgroup_city_category_page" resource="default" engine="innodb" comment="City Category Page Contents And Configurations">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="int" name="city_id" unsigned="true" nullable="false" identity="false"
+                comment="City ID"/>
+        <column xsi:type="int" name="state_id" unsigned="true" nullable="false" identity="false"
+                comment="State ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is City Category Page Active"/>     
+        <!--<column xsi:type="varchar" name="city_name" nullable="false" length="255" comment="City Name"/>-->
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="false" identity="false"
+                comment="Category ID"/>
+        <column xsi:type="mediumtext" name="description" nullable="true" comment="City Page Description"/>
+        <column xsi:type="text" name="meta_title" nullable="true" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="varchar" name="meta_robot" nullable="false" length="255" comment="Meta Robot"/>
+        <column xsi:type="text" name="product_ids" nullable="true" comment="Product Ids"/>
+        <column xsi:type="int" name="product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Product List Limit"/>
+        <column xsi:type="smallint" name="slider_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Slider Block Status"/>
+        <column xsi:type="mediumtext" name="slider" nullable="true" comment="Slider"/>
+        <column xsi:type="smallint" name="send_gift_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Send Gift Block Status"/>
+        <column xsi:type="text" name="send_gift_block_content" nullable="true" comment="Send Gift Block Content"/>
+        <column xsi:type="smallint" name="free_shipping_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Free Shipping Block Status"/>
+        <column xsi:type="text" name="free_shipping_block_content" nullable="true" comment="Free Shipping Block Content"/>
+        <column xsi:type="smallint" name="same_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Same Day Delivery Block Status"/>
+        <column xsi:type="text" name="same_day_delivery_block_content" nullable="true" comment="Same Day Delivery Block Content"/>        
+        <column xsi:type="smallint" name="next_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Next Day Delivery Block Status"/>
+        <column xsi:type="text" name="next_day_delivery_block_content" nullable="true" comment="Next Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="any_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Any Day Delivery Block Status"/>
+        <column xsi:type="varchar" name="any_day_delivery_block_title" nullable="false" length="255" comment="Any Day Delivery Block Title"/>
+        <column xsi:type="text" name="any_day_delivery_block_content" nullable="true" comment="Any Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="popular_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Popular Products Block Status"/>
+        <column xsi:type="int" name="popular_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Popular Product List Limit"/>
+        <column xsi:type="smallint" name="review_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Review Products Block Status"/>
+        <column xsi:type="int" name="review_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Review Block Product Limit"/>
+        <column xsi:type="smallint" name="category_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Category City List Block Status"/>
+        <column xsi:type="int" name="category_city_page_limit" unsigned="true" nullable="true" identity="false"
+                comment="Category City Page Limit"/>
+        <column xsi:type="smallint" name="related_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Related City List Block Status"/>
+        <column xsi:type="int" name="related_city_limit" unsigned="true" nullable="true" identity="false"
+                comment="Related City List Limit"/>
+        <column xsi:type="smallint" name="faq_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="FAQ Block Status"/>        
+        <!--<column xsi:type="varchar" name="faq" nullable="true" length="255" comment="FAQ ids"/>-->
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"/>
+        <column xsi:type="int" name="slider_id" unsigned="true" nullable="true" identity="false"
+                comment="Slider ID"/>
+        <column xsi:type="smallint" name="block2_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 2 Status"/>
+        <column xsi:type="varchar" name="block2_content_title" nullable="false" length="255" comment="Text block 2 title"/>
+        <column xsi:type="text" name="block2_content" nullable="true" comment="Text block 2 content"/>
+        <column xsi:type="smallint" name="block3_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 3 Status"/>
+        <column xsi:type="varchar" name="block3_title" nullable="false" length="255" comment="Product carousel block title"/>
+        <column xsi:type="varchar" name="block3_category" nullable="true" length="255" comment="Product carousel category ids"/>
+        <column xsi:type="smallint" name="three_col_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="3 Column block status"/>
+        <column xsi:type="text" name="three_col_block_col1" nullable="false" comment="Column 1 content"/>
+        <column xsi:type="text" name="three_col_block_col2" nullable="false" comment="Column 2 content"/>
+        <column xsi:type="text" name="three_col_block_col3" nullable="false" comment="Column 3 content"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITY_CATEGORY_PAGE_STORE_ID_STORE_STORE_ID" table="giftgroup_city_category_page"
+                column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="NO ACTION"/>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITY_CATEGORY_PAGE_CITY_ID_GIFTGROUP_CITIES_ID" table="giftgroup_city_category_page"
+                column="city_id" referenceTable="giftgroup_cities" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITY_CATEGORY_PAGE_CATEGORY_ID_CATALOG_CATEGORY_ENTITY_ENTITY_ID" table="giftgroup_city_category_page"
+                column="category_id" referenceTable="catalog_category_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_CITY_CATEGORY_PAGE_STATE_ID_GIFTGROUP_STATES_ID" table="giftgroup_city_category_page"
+                column="state_id" referenceTable="giftgroup_states" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="GIFTGROUP_CITY_CATEGORY_CITY_ID_STORE_ID_CATEGORY_ID">
+            <column name="city_id"/>
+            <column name="store_id"/>
+            <column name="category_id"/>
+        </constraint>
+        <index referenceId="GIFTGROUP_CITY_CATEGORY_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="GIFTGROUP_CITY_CATEGORY_CATEGORY_ID" indexType="btree">
+            <column name="category_id"/>
+        </index>
+        <index referenceId="GIFTGROUP_CITY_CATEGORY_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+    <table name="giftgroup_state_page" resource="default" engine="innodb" comment="State Page Contents And Configurations">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="int" name="state_id" unsigned="true" nullable="false" identity="false"
+                comment="State ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is City Category Page Active"/>
+        <column xsi:type="mediumtext" name="description" nullable="true" comment="City Page Description"/>
+        <column xsi:type="text" name="meta_title" nullable="true" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="varchar" name="meta_robot" nullable="false" length="255" comment="Meta Robot"/>
+        <column xsi:type="text" name="product_ids" nullable="true" comment="Product Ids"/>
+        <column xsi:type="int" name="product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Product List Limit"/>
+        <column xsi:type="smallint" name="slider_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Slider Block Status"/>
+        <column xsi:type="mediumtext" name="slider" nullable="true" comment="Slider"/>
+        <column xsi:type="smallint" name="send_gift_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Send Gift Block Status"/>
+        <column xsi:type="text" name="send_gift_block_content" nullable="true" comment="Send Gift Block Content"/>
+        <column xsi:type="smallint" name="free_shipping_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Free Shipping Block Status"/>
+        <column xsi:type="text" name="free_shipping_block_content" nullable="true" comment="Free Shipping Block Content"/>
+        <column xsi:type="smallint" name="same_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Same Day Delivery Block Status"/>
+        <column xsi:type="text" name="same_day_delivery_block_content" nullable="true" comment="Same Day Delivery Block Content"/>        
+        <column xsi:type="smallint" name="next_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Next Day Delivery Block Status"/>
+        <column xsi:type="text" name="next_day_delivery_block_content" nullable="true" comment="Next Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="any_day_delivery_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Any Day Delivery Block Status"/>
+        <column xsi:type="varchar" name="any_day_delivery_block_title" nullable="false" length="255" comment="Any Day Delivery Block Title"/>
+        <column xsi:type="text" name="any_day_delivery_block_content" nullable="true" comment="Any Day Delivery Block Content"/>
+        <column xsi:type="smallint" name="popular_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Popular Products Block Status"/>
+        <column xsi:type="int" name="popular_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Popular Product List Limit"/>
+        <column xsi:type="smallint" name="review_product_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Review Products Block Status"/>
+        <column xsi:type="int" name="review_product_limit" unsigned="true" nullable="true" identity="false"
+                comment="Review Block Product Limit"/>
+        <column xsi:type="smallint" name="category_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Category City List Block Status"/>
+        <column xsi:type="int" name="category_city_page_limit" unsigned="true" nullable="true" identity="false"
+                comment="Category City Page Limit"/>
+        <column xsi:type="smallint" name="related_city_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Related City List Block Status"/>
+        <column xsi:type="int" name="related_city_limit" unsigned="true" nullable="true" identity="false"
+                comment="Related City List Limit"/>
+        <column xsi:type="smallint" name="faq_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="FAQ Block Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"/>
+        <column xsi:type="int" name="slider_id" unsigned="true" nullable="true" identity="false"
+                comment="Slider ID"/>
+        <column xsi:type="smallint" name="block2_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 2 Status"/>
+        <column xsi:type="varchar" name="block2_content_title" nullable="false" length="255" comment="Text block 2 title"/>
+        <column xsi:type="text" name="block2_content" nullable="true" comment="Text block 2 content"/>
+        <column xsi:type="smallint" name="block3_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Block 3 Status"/>
+        <column xsi:type="varchar" name="block3_title" nullable="false" length="255" comment="Product carousel block title"/>
+        <column xsi:type="varchar" name="block3_category" nullable="true" length="255" comment="Product carousel category ids"/>
+        <column xsi:type="smallint" name="three_col_block_status" unsigned="false" nullable="false" identity="false"
+                default="1" comment="3 Column block status"/>
+        <column xsi:type="text" name="three_col_block_col1" nullable="false" comment="Column 1 content"/>
+        <column xsi:type="text" name="three_col_block_col2" nullable="false" comment="Column 2 content"/>
+        <column xsi:type="text" name="three_col_block_col3" nullable="false" comment="Column 3 content"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_STATE_PAGE_STORE_ID_STORE_STORE_ID" table="giftgroup_state_page"
+                column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="NO ACTION"/>
+        <constraint xsi:type="foreign" referenceId="GIFTGROUP_STATE_PAGE_STATE_ID_GIFTGROUP_STATES_ID" table="giftgroup_state_page"
+                column="state_id" referenceTable="giftgroup_states" referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="GIFTGROUP_STATE_STATE_ID_STORE_ID">
+            <column name="state_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="GIFTGROUP_STATE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="GIFTGROUP_STATE_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+    <table name="giftgroup_states" resource="default" engine="innodb" comment="States">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar" name="state_name" nullable="false" length="255" comment="State Name"/>
+        <column xsi:type="varchar" name="state_code" nullable="false" length="255" comment="State Code"/>
+        <column xsi:type="varchar" name="magento_region_id" nullable="false" length="255" comment="Region id"/>
+        <column xsi:type="varchar" name="country_code" nullable="false" length="255" comment="Country Code"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="GIFTGROUP_STATES_STATE_CODE">
+            <column name="state_code"/>
+        </constraint>
+    </table>
+</schema>

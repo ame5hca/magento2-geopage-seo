@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="GiftGroup_GeoPage::geopage" title="Geo Pages" translate="title"
+             module="GiftGroup_GeoPage" sortOrder="1020"
+             resource="GiftGroup_GeoPage::geopage" parent="GiftGroup_SEO::parent"/>
+        <add id="GiftGroup_GeoPage::city" title="City Management" translate="title"
+             module="GiftGroup_GeoPage" sortOrder="0"
+             parent="GiftGroup_GeoPage::geopage" action="geopage/city/"
+             resource="GiftGroup_GeoPage::city"/>
+        <add id="GiftGroup_GeoPage::city_page" title="City Pages" translate="title"
+             module="GiftGroup_GeoPage" sortOrder="1"
+             parent="GiftGroup_GeoPage::geopage" action="geopage/citypage/"
+             resource="GiftGroup_GeoPage::city_page"/>
+        <add id="GiftGroup_GeoPage::category_page" title="Category Pages" translate="title"
+             module="GiftGroup_GeoPage" sortOrder="2"
+             parent="GiftGroup_GeoPage::geopage" action="geopage/categorypage/"
+             resource="GiftGroup_GeoPage::city_page"/>
+        <add id="GiftGroup_GeoPage::state" title="States" translate="title"
+             module="GiftGroup_GeoPage" sortOrder="3"
+             parent="GiftGroup_GeoPage::geopage" action="geopage/state/"
+             resource="GiftGroup_GeoPage::state"/>
+        <add id="GiftGroup_GeoPage::state_page" title="State Page" translate="title"
+             module="GiftGroup_GeoPage" sortOrder="4"
+             parent="GiftGroup_GeoPage::geopage" action="geopage/statepage/"
+             resource="GiftGroup_GeoPage::state_page"/>
+        <add id="GiftGroup_GeoPage::city_import" title="City Import" translate="title"
+             module="GiftGroup_GeoPage" sortOrder="40"
+             parent="GiftGroup_GeoPage::geopage" action="admin/import"
+             resource="GiftGroup_GeoPage::city_import"/>
+    </menu>
+</config>

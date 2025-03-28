@@ -1,0 +1,71 @@
+<?php
+$viewModel = $block->getParentBlock()->getViewModel();
+if($viewModel->showThreeColumnBlock()):
+    $content = $viewModel->getThreeColumnContent();
+?>
+<div class="mainContainer block-content three-column-block no-padding-top">           
+    <div class="three-column-block-carousel-mobile content no-padding-top" align="center">
+        <div class="item one-thrid column-1">
+            <div class="image">
+                <img src="<?= $this->getViewFileUrl('GiftGroup_GeoPage::images/delivery-truck.png')?>" />
+            </div>
+            <div class="title">
+                <h3><?= __($viewModel->getThreeColumnHeading1())?></h3>
+            </div>
+            <div class="content"><?= $content['col1'] ?></div>
+            <div class="mobile-divider"></div>
+        </div>                
+        <div class="item one-thrid column-2">
+            <div class="image">
+                <img src="<?= $this->getViewFileUrl('GiftGroup_GeoPage::images/love-cart.png')?>" />
+            </div>
+            <div class="title">
+                <h3><?= __($viewModel->getThreeColumnHeading2())?></h3>
+            </div>
+            <div class="content"><?= $content['col2'] ?></div>
+            <div class="mobile-divider"></div>
+        </div>                
+        <div class="item one-thrid column-3">
+            <div class="image">
+                <img src="<?= $this->getViewFileUrl('GiftGroup_GeoPage::images/delivery-time.png')?>" />
+            </div>
+            <div class="title">
+                <h3><?= __($viewModel->getThreeColumnHeading3())?></h3>
+            </div>
+            <div class="content"><?= $content['col3'] ?></div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<script>
+require(['jquery', 'geopage_owlcarousel'], function($) {
+    $(document).ready(function() {
+        if(window.matchMedia("(max-width: 767px)").matches){
+            $('.three-column-block-carousel-mobile').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                items: 1,
+                autoplay: true,
+                responsiveClass:true,
+                itemsDesktop: 3,
+                itemsDesktopSmall: 2,
+                itemsTablet: 1,
+                itemsTabletSmall: 1,
+                itemsMobile: 1,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 2
+                    },
+                    1400: {
+                        items: 3
+                    }
+                }
+            });
+        }
+    });
+});
+</script>

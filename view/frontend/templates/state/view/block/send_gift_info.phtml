@@ -1,0 +1,16 @@
+<?php
+$viewModel = $block->getParentBlock()->getViewModel();
+if($viewModel->showSendingGiftBasketInfo()):
+    $content = $viewModel->getSendingGiftBasketContent();
+    if ($content):
+?>
+        <div class="mainContainer block-content send-gift-info width-80">
+            <div class="block-title">
+                <h2><?= $viewModel->getSendingGiftBasketBlockTitle() ?></h2>
+            </div>
+            <div class="content">
+                <p><?= $content ?></p>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

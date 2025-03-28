@@ -1,0 +1,9 @@
+<?php $viewModel = $this->getViewModel(); ?>
+<div class="city-page-wrapper state-page">
+    <div class="page-title">
+        <h1 class="section-heading text-center bold">
+            <?= $viewModel->getPageTitle() ?>
+        </h1>
+    </div>
+    <?= $block->getChildHtml(); ?>
+</div>

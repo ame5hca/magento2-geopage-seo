@@ -1,0 +1,10 @@
+<?php
+$cityPageCollection = $block->getList();
+if ($cityPageCollection->getSize()):
+?>
+    <?php foreach ($cityPageCollection as $page): ?>
+        <a href="<?= $this->getBaseUrl() . $page->getUrl() ?>" target="_blank" rel="noopener">
+            <?= $page->getData('name') ?>, 
+        </a>
+    <?php endforeach; ?>
+<?php endif; ?>

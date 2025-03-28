@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="GiftGroup\GeoPage\Model\ResourceModel\City\Grid\Collection"
+        type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable"
+                xsi:type="string">giftgroup_cities</argument>
+            <argument name="resourceModel"
+                xsi:type="string">GiftGroup\GeoPage\Model\ResourceModel\City\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections"
+                xsi:type="array">
+                <item name="city_listing_data_source"
+                    xsi:type="string">
+                    GiftGroup\GeoPage\Model\ResourceModel\City\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="GiftGroup\GeoPage\Model\ResourceModel\CityPage\Grid\Collection"
+        type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable"
+                xsi:type="string">giftgroup_city_page</argument>
+            <argument name="resourceModel"
+                xsi:type="string">GiftGroup\GeoPage\Model\ResourceModel\CityPage\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections"
+                xsi:type="array">
+                <item name="city_page_listing_data_source"
+                    xsi:type="string">
+                    GiftGroup\GeoPage\Model\ResourceModel\CityPage\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="GiftGroup\GeoPage\Model\ResourceModel\CityCategoryPage\Grid\Collection"
+        type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable"
+                xsi:type="string">giftgroup_city_category_page</argument>
+            <argument name="resourceModel"
+                xsi:type="string">GiftGroup\GeoPage\Model\ResourceModel\CityCategoryPage\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections"
+                xsi:type="array">
+                <item name="category_page_listing_data_source"
+                    xsi:type="string">
+                    GiftGroup\GeoPage\Model\ResourceModel\CityCategoryPage\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="GiftGroup\GeoPage\Model\ResourceModel\States\Grid\Collection"
+        type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable"
+                xsi:type="string">giftgroup_states</argument>
+            <argument name="resourceModel"
+                xsi:type="string">GiftGroup\GeoPage\Model\ResourceModel\States\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections"
+                xsi:type="array">
+                <item name="state_listing_data_source"
+                    xsi:type="string">
+                    GiftGroup\GeoPage\Model\ResourceModel\States\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="GiftGroup\GeoPage\Model\ResourceModel\StatePage\Grid\Collection"
+        type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable"
+                xsi:type="string">giftgroup_state_page</argument>
+            <argument name="resourceModel"
+                xsi:type="string">GiftGroup\GeoPage\Model\ResourceModel\StatePage\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections"
+                xsi:type="array">
+                <item name="state_page_listing_data_source"
+                    xsi:type="string">
+                    GiftGroup\GeoPage\Model\ResourceModel\StatePage\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="GiftGroup\GeoPage\Logger\Handler">
+        <arguments>
+            <argument name="filesystem"
+                xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="GiftGroup\GeoPage\Logger\Logger">
+        <arguments>
+            <argument name="name"
+                xsi:type="string">geopage_error</argument>
+            <argument name="handlers"
+                xsi:type="array">
+                <item name="system"
+                    xsi:type="object">GiftGroup\GeoPage\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>    
+</config>

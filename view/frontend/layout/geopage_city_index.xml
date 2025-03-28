@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    layout="1column"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="GiftGroup_GeoPage::css/geopage.css" />
+    </head>
+    <body>
+        <referenceBlock name="page.main.title" remove="true" />
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="geopage_additional_scripts_styles" template="GiftGroup_GeoPage::page/head_additional.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        GiftGroup\GeoPage\ViewModel\Head
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Areas</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Areas</item>
+                    <item name="label" xsi:type="string">Areas</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                name="city.hub.page"
+                template="GiftGroup_GeoPage::city/hub.phtml">                
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        GiftGroup\GeoPage\ViewModel\City
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

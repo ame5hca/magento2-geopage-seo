@@ -1,0 +1,53 @@
+<?php
+$viewModel = $block->getParentBlock()->getViewModel();
+if ($viewModel->showRelatedCityList()) :
+    $relatedCities = $viewModel->getRelatedCities();
+    if ($relatedCities->getSize()) :
+?>
+        <div class="mainContainer block-content related-cities width-80">
+            <div class="block-title">
+                <span><?= $viewModel->getRelatedCitiesBlockTitle() ?></span>
+                <div class="heading-divider heading-divider--short"></div>
+            </div>
+            <div class="content">
+                <div class="carousel-wrap">
+                    <div class="owl-carousel related-cities-carousel">
+                        <?php foreach ($relatedCities as $city) : ?>
+                            <div class="item">
+                                <?php $itemName = __('%1 Gift Baskets', $city->getData('city_name')); ?>
+                                <p><a href="<?= $block->getBaseUrl() . $city->getUrl() ?>" title="<?= $itemName ?>">
+                                    <?= $itemName ?>
+                                </a></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<script>
+    require(['jquery', 'geopage_owlcarousel'], function($) {
+        $(document).ready(function() {
+            $('.related-cities-carousel').owlCarousel({
+                loop: true,
+                margin: 10,                
+                items: 5,
+                autoplay: true,
+                responsiveClass:true,  
+                itemsMobile : [479, 2],
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+        });
+    });
+</script>
